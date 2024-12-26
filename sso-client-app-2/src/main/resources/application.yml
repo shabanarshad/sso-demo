@@ -1,0 +1,36 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          custom:
+            client-id: ssoClient-2
+            client-secret: hc8GVb0GvJ7Lc9Ujj8E27XJseMBkXV2v
+            scope: openid,email
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8084/ui-two/login/oauth2/code/custom
+        provider:
+          custom:
+            authorization-uri: http://localhost:8181/realms/sso-test/protocol/openid-connect/auth
+            token-uri: http://localhost:8181/realms/sso-test/protocol/openid-connect/token
+            user-info-uri: http://localhost:8181/realms/sso-test/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8181/realms/sso-test/protocol/openid-connect/certs
+            user-name-attribute: preferred_username
+  thymeleaf:
+    cache: false
+  cache:
+    type: NONE
+    
+server: 
+  port: 8084
+  servlet: 
+    context-path: /ui-two
+    
+logging: 
+  level: 
+    org.springframework: INFO
+
+resourceserver:
+  api:
+    url: http://localhost:8080/myAccount?email=happy@example.com
+      
